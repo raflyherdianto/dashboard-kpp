@@ -59,4 +59,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Site::class);
     }
+
+    public function wali()
+    {
+        return $this->hasMany(GlWali::class, 'wali_id');
+    }
+
+    public function mekanik()
+    {
+        return $this->hasMany(Mekanik::class, 'mekanik_id');
+    }
 }
