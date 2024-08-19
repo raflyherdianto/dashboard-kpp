@@ -46,4 +46,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    public function site()
+    {
+        return $this->belongsTo(Site::class);
+    }
 }
