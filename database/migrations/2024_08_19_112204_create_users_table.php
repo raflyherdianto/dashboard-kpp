@@ -19,9 +19,9 @@ return new class extends Migration
             $table->enum('status', ['PKWTT', 'PKWT'])->nullable();
             $table->integer('grade')->nullable();
             $table->date('promotion_date')->nullable();
-            $table->foreignId('position_id')->constrained()->nullable();
-            $table->foreignId('department_id')->constrained()->nullable();
-            $table->foreignId('site_id')->constrained()->nullable();
+            $table->foreignId('position_id')->nullable()->constrained();
+            $table->foreignId('department_id')->nullable()->constrained();
+            $table->foreignId('site_id')->nullable()->constrained();
             $table->string('education')->nullable();
             $table->float('total_point')->nullable();
             $table->string('password');

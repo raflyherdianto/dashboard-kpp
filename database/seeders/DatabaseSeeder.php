@@ -15,11 +15,15 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(100)->create();
         $this->call([
-            RoleSeeder::class
+            RoleSeeder::class,
+            SiteSeeder::class,
+            DepartmentSeeder::class,
+            PositionSeeder::class,
         ]);
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        User::factory()->create([
+            'nrp' => 'ASD',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+        ])->assignRole('Planner');
     }
 }
