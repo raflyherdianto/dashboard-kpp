@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
             SiteSeeder::class,
             DepartmentSeeder::class,
             PositionSeeder::class,
+            EgiSeeder::class,
+            CompetenceSeeder::class,
+            SubCompetenceSeeder::class,
         ]);
         User::factory()->create([
             'nrp' => 'ASD',
