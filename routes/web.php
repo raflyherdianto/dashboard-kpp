@@ -18,4 +18,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('glwali', GlWaliController::class);
     Route::resource('mekanik', MekanikController::class);
+    Route::post('mekanik/import-data', [MekanikController::class, 'importData'])->middleware('increaseExecutionTime')->name('mekanik.import');
 });

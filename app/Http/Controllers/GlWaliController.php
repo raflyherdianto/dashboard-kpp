@@ -40,7 +40,7 @@ class GlWaliController extends Controller
     public function show(GlWali $glwali)
     {
         $data = $glwali;
-        $mekanikIds = $data->mekaniks->pluck('id')->toArray();
+        $mekanikIds = $data->mekaniks->pluck('mekanik_id')->toArray();
         $mekaniks = User::role('Mekanik')
         ->whereNotIn('id', $mekanikIds)
             ->get();

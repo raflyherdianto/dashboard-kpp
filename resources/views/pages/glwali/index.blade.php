@@ -2,8 +2,7 @@
 @section('title', 'List Users')
 @section('content')
 <div class="d-flex justify-content-between py-3 mb-4">
-    <h4 class="fw-bold "><span class="text-muted fw-light">Users /</span> List Users</h4>
-    <a href="{{ route('users.create') }}" class="btn btn-primary">Add Users</a>
+    <h4 class="fw-bold "><span class="text-muted fw-light">Gl wali /</span> List Gl wali</h4>
 </div>
 <div class="card p-3">
     <div class="table-responsive text-nowrap">

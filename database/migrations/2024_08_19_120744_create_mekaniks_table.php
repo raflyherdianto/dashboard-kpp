@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('gl_wali_id')->constrained('gl_walis', 'id');
             $table->foreignId('mekanik_id')->constrained('users', 'id');
             $table->enum('status', ['MAP', 'IDP', 'MM']);
-            $table->enum('section', ['Crusher', 'Minimex', 'SSE', 'Track', 'Wheel']);
+            $table->enum('section', ['CRUSHER', 'MINIMEX', 'SSE', 'TRACK', 'WHEEL']);
             $table->integer('grade');
             $table->timestamps();
-        });
+        }); 
     }
 
     /**
