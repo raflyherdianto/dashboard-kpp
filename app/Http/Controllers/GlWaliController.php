@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGlWaliRequest;
 use App\Http\Requests\UpdateGlWaliRequest;
 use App\Models\GlWali;
+use App\Models\User;
 
 class GlWaliController extends Controller
 {
@@ -13,7 +14,8 @@ class GlWaliController extends Controller
      */
     public function index()
     {
-        //
+        $datas = GlWali::with('mekaniks')->get();
+        return view('pages.glwali.index', compact('datas'));
     }
 
     /**
@@ -35,9 +37,14 @@ class GlWaliController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(GlWali $glWali)
+    public function show(GlWali $glwali)
     {
-        //
+        $data = $glwali;
+        $mekanikIds = $data->mekaniks->pluck('id')->toArray();
+        $mekaniks = User::role('Mekanik')
+        ->whereNotIn('id', $mekanikIds)
+            ->get();
+        return view('pages.glwali.show', compact('data', 'mekaniks'));
     }
 
     /**

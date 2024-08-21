@@ -25,5 +25,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
         ])->assignRole('Planner');
+        $this->call([
+            UserSeeder::class
+        ]);
     }
 }

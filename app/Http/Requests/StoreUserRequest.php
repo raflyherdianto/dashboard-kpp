@@ -22,11 +22,20 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'nrp' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg',
-            'email' => 'required|string|email|max:255|unique:users',
+            'status' => 'nullable',
+            'grade' => 'nullable|numeric',
+            'promotion_date' => 'nullable|date',
+            'position_id' => 'nullable',
+            'department_id' => 'nullable',
+            'site_id' => 'nullable',
+            'education' => 'nullable',
+            'total_point' => 'nullable',
             'password' => 'required|string|min:8',
-            'password_confirmation' => 'required|string|same:password',
+            'password_confirmation' => 'required|string|min:8|same:password',
+            'role' => 'required|string'
         ];
     }
 }

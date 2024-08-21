@@ -6,25 +6,13 @@
     <a href="{{ route('users.create') }}" class="btn btn-primary">Add Users</a>
 </div>
 <div class="card p-3">
-    <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="d-flex justify-content-end mb-3">
-            <div class="d-flex gap-3">
-                <input type="file" class="form-control " id="basic-default-name" name="excel" placeholder="Name"
-                    accept=".xlsx,.xls,.csv" required />
-                <button type="submit" class="btn btn-primary">Import</button>
-            </div>
-        </div>
-    </form>
     <div class="table-responsive text-nowrap">
         <table id="table" class="table">
             <thead>
                 <tr>
                     <th style="width: 5%">No</th>
-                    <th>NRP</th>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Email</th>
+                    <th>Nama Gl Wali</th>
+                    <th>Total Mekanik</th>
                     <th style="width: 10%">Actions</th>
                 </tr>
             </thead>
@@ -35,21 +23,13 @@
                 @foreach ($datas as $data)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ $data->nrp }}</td>
-                    <td>{{ $data->name }}</td>
-                    <td>{{ $data->roles[0]->name ?? '-' }}</td>
-                    <td>{{ $data->email }}</td>
+                    <td>{{ $data->user->name }}</td>
+                    <td>{{ count($data->mekaniks) }}</td>
                     <td>
-                        <a href="{{ route('users.show', $data->id) }}" class="bg-label-info badge">
+                        <a href="{{ route('glwali.show', $data->id) }}" class="bg-label-info badge">
                             <span class="tf-icons bx bx-show"></span> Show
                         </a>
-                        <a href="{{ route('users.edit', $data->id) }}" class="bg-label-warning badge">
-                            <span class="tf-icons bx bx-edit"></span> Edit
-                        </a>
-                        <a href="javascript:void(0)" onclick="confirmDelete({{ $data->id }})"
-                            class="bg-label-danger badge">
-                            <span class="tf-icons bx bx-trash"></span> Delete
-                        </a>
+
                     </td>
                 </tr>
                 @endforeach

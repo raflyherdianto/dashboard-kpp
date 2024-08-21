@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMekanikRequest;
 use App\Http\Requests\UpdateMekanikRequest;
 use App\Models\Mekanik;
+use App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class MekanikController extends Controller
 {
@@ -29,7 +31,17 @@ class MekanikController extends Controller
      */
     public function store(StoreMekanikRequest $request)
     {
-        //
+        $user = User::where('nrp', $request->mekanik)->first();
+        $data = [
+            'gl_wali_id' => $request->gl_wali_id,
+            'status' => $request->status,
+            'section' => strtoupper($request->section),
+            'grade' => $request->grade,
+            'mekanik_id' => $user->id,
+        ];
+        Mekanik::create($data);
+        Alert::success('Success', 'New data has been created');
+        return redirect()->back();
     }
 
     /**

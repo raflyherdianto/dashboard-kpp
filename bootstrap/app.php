@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+            'increaseExecutionTime' => App\Http\Middleware\IncreaseExecutionTime::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

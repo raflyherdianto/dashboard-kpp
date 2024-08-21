@@ -30,6 +30,14 @@
                 <div data-i18n="Basic">Users</div>
             </a>
         </li>
+        @role('Planner')
+        <li class="menu-item {{ Request::is('glwali*') ? 'active' : '' }}">
+            <a href="{{ route('glwali.index') }}" class="menu-link ">
+                <i class='bx bx-group menu-icon tf-icons'></i>
+                <div data-i18n="Basic">Gl Wali</div>
+            </a>
+        </li>
+        @endrole
         {{-- <li class="menu-item {{ Request::is('attendance*') ? 'active' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class='bx bx-user-check menu-icon tf-icons'></i>

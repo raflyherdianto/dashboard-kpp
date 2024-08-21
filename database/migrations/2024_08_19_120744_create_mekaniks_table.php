@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('mekanik_id')->constrained('users', 'id');
             $table->enum('status', ['MAP', 'IDP', 'MM']);
             $table->enum('section', ['Crusher', 'Minimex', 'SSE', 'Track', 'Wheel']);
+            $table->integer('grade');
             $table->timestamps();
         });
     }
