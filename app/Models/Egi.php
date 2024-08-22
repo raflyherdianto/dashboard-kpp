@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Egi extends Model
 {
     use HasFactory;
+
+    public function competences(){
+        return $this->hasMany(Competence::class);
+    }
+    
 }

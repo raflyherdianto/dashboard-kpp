@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Competence;
+use App\Models\Egi;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,14 +23,18 @@ class CompetenceSeeder extends Seeder
             "VI" => "REPAIR"
         ];
 
-        foreach ($maintenanceTasks as $code => $name) {
-            Competence::create([
-                'code' => $code,
-                'name' => $name,
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-        }
+        $egis = Egi::all();
 
+        foreach ($egis as $egi) {
+            foreach ($maintenanceTasks as $code => $name) {
+                Competence::create([
+                    'egi_id' => $egi->id,
+                    'code' => $code,
+                    'name' => $name,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
     }
 }

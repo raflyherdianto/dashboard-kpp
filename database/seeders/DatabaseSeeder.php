@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(100)->create();
         $this->call([
             RoleSeeder::class,
             SiteSeeder::class,
@@ -22,6 +20,7 @@ class DatabaseSeeder extends Seeder
             EgiSeeder::class,
             CompetenceSeeder::class,
             SubCompetenceSeeder::class,
+            SubEgiSeeder::class,
         ]);
         User::factory()->create([
             'nrp' => 'ASD',

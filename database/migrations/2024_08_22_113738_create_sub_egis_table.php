@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('competences', function (Blueprint $table) {
+        Schema::create('sub_egis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('egi_id')->constrained('egis');
-            $table->string('code');
             $table->string('name');
             $table->timestamps();
         });
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('competences');
+        Schema::dropIfExists('sub_egis');
     }
 };
