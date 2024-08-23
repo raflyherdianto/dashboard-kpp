@@ -65,7 +65,13 @@ class EgiController extends Controller
                     // $name = ucwords(strtolower($name));
                     // trim name
                     $name = trim($name);
-                    $subCompetence = $subCompetences->firstWhere('name', $name);
+                    $normalize = function ($str) {
+                        return strtolower(preg_replace('/\s+/', ' ', preg_replace('/[^a-zA-Z0-9]/', '', $str)));
+                    };
+
+                    $subCompetence = $subCompetences->filter(function ($item) use ($name, $normalize) {
+                        return $normalize($item->name) === $normalize($name);
+                    })->first();
 
                     // Prepare the data to be saved
                     if ($currentCompetence && $subCompetence) {
@@ -84,7 +90,7 @@ class EgiController extends Controller
                             'updated_at' => now()
                         ];
                         $amount[] = $data;
-                    }else{
+                    } else {
 
                         dd($currentCompetence, $key, $subCompetence ? $subCompetence->name : null, $name);
                     }
@@ -99,9 +105,9 @@ class EgiController extends Controller
                     // Find the subcompetence by name
                 }
             }
-            // CompetenceSubCompetence::insert($datas);
         }
-        dd($amount);
+        CompetenceSubCompetence::insert($datas);
+
         Alert::success('Success', 'New data has been created');
         return redirect()->back();
     }
