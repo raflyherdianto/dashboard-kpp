@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('competence_sub_competences', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('competence_id')->constrained('competences');
+            $table->foreignId('sub_competence_id')->constrained('sub_competences');
+            $table->string('code');
             $table->timestamps();
         });
     }

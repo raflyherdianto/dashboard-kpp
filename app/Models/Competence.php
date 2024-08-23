@@ -13,4 +13,9 @@ class Competence extends Model
     {
         return $this->belongsTo(Egi::class);
     }
+
+    public function competence_sub_competences()
+    {
+        return $this->hasMany(CompetenceSubCompetence::class);
+    }
 }

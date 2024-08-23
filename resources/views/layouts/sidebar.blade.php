@@ -37,6 +37,12 @@
                 <div data-i18n="Basic">Gl Wali</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('databank*') ? 'active' : '' }}">
+            <a href="{{ route('databank.index') }}" class="menu-link ">
+                <i class='bx bx-file menu-icon tf-icons'></i>
+                <div data-i18n="Basic">Databank</div>
+            </a>
+        </li>
         @endrole
         {{-- <li class="menu-item {{ Request::is('attendance*') ? 'active' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">

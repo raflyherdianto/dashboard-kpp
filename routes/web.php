@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EgiController;
 use App\Http\Controllers\GlWaliController;
 use App\Http\Controllers\MekanikController;
 use App\Http\Controllers\UserController;
@@ -19,4 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('glwali', GlWaliController::class);
     Route::resource('mekanik', MekanikController::class);
     Route::post('mekanik/import-data', [MekanikController::class, 'importData'])->middleware('increaseExecutionTime')->name('mekanik.import');
+
+    Route::resource('databank', EgiController::class);
+    Route::post('databank/import-data', [EgiController::class, 'importData'])->middleware('increaseExecutionTime')->name('databank.import');
 });
