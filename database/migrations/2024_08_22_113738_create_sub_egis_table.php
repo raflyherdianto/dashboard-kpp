@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sub_egis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('egi_id')->constrained();
             $table->string('name');
             $table->timestamps();
         });
