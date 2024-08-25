@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class SubCompetence extends Model
 {
     use HasFactory;
+
+    public function competence_score()
+    {
+        return $this->hasMany(Competence_score::class);
+    }
 }

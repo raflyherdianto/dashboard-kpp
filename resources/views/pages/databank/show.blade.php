@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="table-responsive text-nowrap mt-3">
-        <form action="{{ route('databank.import') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('score.import') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="d-flex justify-content-end mb-3">
                 <div class="d-flex gap-3">

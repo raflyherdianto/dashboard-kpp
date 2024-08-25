@@ -12,5 +12,9 @@ class Egi extends Model
     public function competences(){
         return $this->hasMany(Competence::class);
     }
-    
+
+    public function subEgis(){
+        return $this->hasMany(SubEgi::class);
+    }
+
 }

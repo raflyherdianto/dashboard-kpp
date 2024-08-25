@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompetenceScoreController;
 use App\Http\Controllers\EgiController;
 use App\Http\Controllers\GlWaliController;
 use App\Http\Controllers\MekanikController;
@@ -23,4 +24,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('databank', EgiController::class);
     Route::post('databank/import-data', [EgiController::class, 'importData'])->middleware('increaseExecutionTime')->name('databank.import');
+
+    Route::post('score/import-data', [CompetenceScoreController::class, 'importData'])->middleware('increaseExecutionTime')->name('score.import');
 });

@@ -30,17 +30,16 @@ class EgiController extends Controller
     {
 
         $subCompetences = SubCompetence::all();
-        if ($request->file('excel') == null) {
-            Alert::error('Error', 'File not found');
-            return redirect()->back();
-        }
-        if (!in_array($request->file('excel')->getClientOriginalExtension(), ['xlsx', 'xls', 'csv'])) {
-            Alert::error('Error', 'Please upload file in .xlsx, .xls or .csv format');
-            return redirect()->back();
-        }
+            if ($request->file('excel') == null) {
+                Alert::error('Error', 'File not found');
+                return redirect()->back();
+            }
+            if (!in_array($request->file('excel')->getClientOriginalExtension(), ['xlsx', 'xls', 'csv'])) {
+                Alert::error('Error', 'Please upload file in .xlsx, .xls or .csv format');
+                return redirect()->back();
+            }
+            $rawFile = Excel::toArray([], $request->file('excel'));
         $amount = [];
-        $total = 0;
-        $rawFile = Excel::toArray([], $request->file('excel'));
         foreach ($rawFile as $key => $rawOut) {
             unset($rawOut[0]);
             $filteredData = array_filter($rawOut, function ($row) {
@@ -94,11 +93,7 @@ class EgiController extends Controller
 
                         dd($currentCompetence, $key, $subCompetence ? $subCompetence->name : null, $name);
                     }
-                    // $amount[] = [
-                    //     $key,
-                    //     $currentCompetence,
-                    //     $subCompetence
-                    // ];
+
                 } else {
                     $currentCompetence = $competences->firstWhere('code', $key);
 
@@ -134,7 +129,9 @@ class EgiController extends Controller
     public function show(Egi $databank)
     {
         $data = $databank;
-        // dd($data);
+        $competenceSubCompetence = CompetenceSubCompetence::whereHas('competence', function ($query) use($data) {
+            $query->where('egi_id', $data->id);
+        })->get();
         return view('pages.databank.show', compact('data'));
     }
 
