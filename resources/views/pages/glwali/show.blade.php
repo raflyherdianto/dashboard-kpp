@@ -6,7 +6,7 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">Add Data</button>
 </div>
 <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form action="{{ route('mekanik.store') }}" method="POST">
                 @csrf

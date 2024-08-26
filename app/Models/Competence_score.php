@@ -14,8 +14,8 @@ class Competence_score extends Model
         return $this->belongsTo(SubEgi::class);
     }
 
-    public function subCompetence()
+    public function competenceSubCompetence()
     {
-        return $this->belongsTo(SubCompetence::class);
+        return $this->belongsTo(CompetenceSubCompetence::class);
     }
 }

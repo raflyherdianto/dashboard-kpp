@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('competence_scores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sub_competence_id')->constrained();
-            $table->foreignId('sub_egi_id')->constrained();
-            $table->string('score');
+            $table->foreignId('competence_sub_competence_id')->constrained('competence_sub_competences');
+            // $table->foreignId('sub_egi_id')->constrained();
+            $table->integer('score')->default(0);
             $table->timestamps();
         });
     }

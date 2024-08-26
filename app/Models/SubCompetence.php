@@ -9,8 +9,8 @@ class SubCompetence extends Model
 {
     use HasFactory;
 
-    public function competence_score()
+    public function competence_sub_competences()
     {
-        return $this->hasMany(Competence_score::class);
+        return $this->hasMany(CompetenceSubCompetence::class);
     }
 }

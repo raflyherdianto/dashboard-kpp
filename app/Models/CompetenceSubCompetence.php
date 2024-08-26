@@ -13,4 +13,13 @@ class CompetenceSubCompetence extends Model
     {
         return $this->belongsTo(Competence::class);
     }
+
+    public function subCompetence(){
+        return $this->belongsTo(SubCompetence::class);
+    }
+
+    public function competenceScore()
+    {
+        return $this->hasMany(Competence_score::class);
+    }
 }

@@ -27,7 +27,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $datas = User::with(['position', 'department', 'site', 'wali', 'mekanik'])->get();
+        $datas = User::with(['position', 'department', 'site', 'roles'])->get();
         return view('pages.users.index', compact('datas'));
     }
 
@@ -109,14 +109,14 @@ class UserController extends Controller
             unset($data['password_confirmation']);
             $role = $data['role'];
             unset($data['role']);
-            if($role == 'Gl Wali'){
+            if ($role == 'Gl Wali') {
                 $user = User::create($data)->assignRole($role);
                 GlWali::create([
                     'wali_id' => $user->id,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
-            }else {
+            } else {
                 User::create($data)->assignRole($role);
             }
             Alert::success('Success', 'User has been created');
@@ -179,7 +179,7 @@ class UserController extends Controller
             if ($user->image) {
                 Storage::delete('public/' . $user->image);
             }
-            if($user->roles[0]->name){
+            if ($user->roles[0]->name) {
                 $glwali = GlWali::where('wali_id', $user->id)->first();
                 $glwali->delete();
             }

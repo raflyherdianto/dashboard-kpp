@@ -14,7 +14,7 @@ class GlWaliController extends Controller
      */
     public function index()
     {
-        $datas = GlWali::with('mekaniks')->get();
+        $datas = GlWali::with('mekaniks', 'user')->get();
         return view('pages.glwali.index', compact('datas'));
     }
 
@@ -42,7 +42,7 @@ class GlWaliController extends Controller
         $data = $glwali;
         $mekanikIds = $data->mekaniks->pluck('mekanik_id')->toArray();
         $mekaniks = User::role('Mekanik')
-        ->whereNotIn('id', $mekanikIds)
+            ->whereNotIn('id', $mekanikIds)
             ->get();
         return view('pages.glwali.show', compact('data', 'mekaniks'));
     }

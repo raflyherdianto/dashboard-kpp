@@ -8,6 +8,7 @@ use App\Models\Competence;
 use App\Models\CompetenceSubCompetence;
 use App\Models\Egi;
 use App\Models\SubCompetence;
+use App\Models\SubEgi;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -30,15 +31,15 @@ class EgiController extends Controller
     {
 
         $subCompetences = SubCompetence::all();
-            if ($request->file('excel') == null) {
-                Alert::error('Error', 'File not found');
-                return redirect()->back();
-            }
-            if (!in_array($request->file('excel')->getClientOriginalExtension(), ['xlsx', 'xls', 'csv'])) {
-                Alert::error('Error', 'Please upload file in .xlsx, .xls or .csv format');
-                return redirect()->back();
-            }
-            $rawFile = Excel::toArray([], $request->file('excel'));
+        if ($request->file('excel') == null) {
+            Alert::error('Error', 'File not found');
+            return redirect()->back();
+        }
+        if (!in_array($request->file('excel')->getClientOriginalExtension(), ['xlsx', 'xls', 'csv'])) {
+            Alert::error('Error', 'Please upload file in .xlsx, .xls or .csv format');
+            return redirect()->back();
+        }
+        $rawFile = Excel::toArray([], $request->file('excel'));
         $amount = [];
         foreach ($rawFile as $key => $rawOut) {
             unset($rawOut[0]);
@@ -93,7 +94,6 @@ class EgiController extends Controller
 
                         dd($currentCompetence, $key, $subCompetence ? $subCompetence->name : null, $name);
                     }
-
                 } else {
                     $currentCompetence = $competences->firstWhere('code', $key);
 
@@ -129,10 +129,12 @@ class EgiController extends Controller
     public function show(Egi $databank)
     {
         $data = $databank;
-        $competenceSubCompetence = CompetenceSubCompetence::whereHas('competence', function ($query) use($data) {
+        $competenceSubCompetence = CompetenceSubCompetence::whereHas('competence', function ($query) use ($data) {
             $query->where('egi_id', $data->id);
         })->get();
-        return view('pages.databank.show', compact('data'));
+        $competences = Competence::where('egi_id', $data->id)->with('competence_sub_competences')->get();
+        $subEgis = SubEgi::where('egi_id', $data->id)->get();
+        return view('pages.databank.show', compact('data', 'competences', 'subEgis'));
     }
 
     /**

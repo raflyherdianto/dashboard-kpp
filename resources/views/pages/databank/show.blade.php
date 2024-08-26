@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="table-responsive text-nowrap mt-3">
-        <form action="{{ route('score.import') }}" method="POST" enctype="multipart/form-data">
+        {{-- <form action="{{ route('score.import') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="d-flex justify-content-end mb-3">
                 <div class="d-flex gap-3">
@@ -23,40 +23,40 @@
                     <button type="submit" class="btn btn-primary">Import</button>
                 </div>
             </div>
-        </form>
-        {{-- <table id="table" class="table">
+        </form> --}}
+        <table class="table">
             <thead>
                 <tr>
-                    <th style="width: 5%">No</th>
-                    <th>NRP</th>
-                    <th>Nama</th>
-                    <th>Grade</th>
-                    <th>Status</th>
-                    <th>Section</th>
-                    <th style="width: 10%">Actions</th>
+                    <th style="width: 5%" class="text-center">No</th>
+                    <th>Competence</th>
+                    @foreach ($subEgis as $subEgi)
+                    <th>{{ $subEgi->name }}</th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                @php
-                $no = 1
-                @endphp
-                @foreach ($data->mekaniks as $mekanik)
+                @foreach ($competences as $competence)
+                <tr style="background: black;color: white">
+                    <td class="text-center">{{ $competence->code }}</td>
+                    <td>{{ $competence->name }}</td>
+                    @foreach ($subEgis as $subEgi)
+                    <td></td>
+                    @endforeach
+                </tr>
+                @foreach ($competence->competence_sub_competences as $data)
                 <tr>
-                    <td>{{ $no++ }}</td>
-        <td>{{ $mekanik->user->nrp }}</td>
-        <td>{{ $mekanik->user->name }}</td>
-        <td>{{ $mekanik->grade }}</td>
-        <td>{{ $mekanik->status }}</td>
-        <td>{{ $mekanik->section }}</td>
-        <td>
-            <a href="javascript:void(0)" onclick="confirmDelete({{ $mekanik->id }})" class="bg-label-danger badge">
-                <span class="tf-icons bx bx-trash"></span> Delete
-            </a>
-        </td>
-        </tr>
-        @endforeach
-        </tbody>
-        </table> --}}
+                    <td class="text-center">{{ $data->code }}</td>
+                    <td>{{ $data->subCompetence->name }}</td>
+                    @foreach ($data->competenceScore as $score)
+                    <td style="{{ $score->score == 0 ? 'background-color: black;' : '' }}">
+                        {{ $score->score != 0 ? $score->score : '' }}
+                    </td>
+                    @endforeach
+                </tr>
+                @endforeach
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
 <form id="deleteForm" method="POST" style="display: none;">
