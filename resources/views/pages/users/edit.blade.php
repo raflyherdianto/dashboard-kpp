@@ -49,7 +49,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="basic-default-phone">Image</label>
                 <div class="col-sm-10">
                     @if($user->image)
@@ -62,9 +62,9 @@
                     <input type="file" id="basic-default-phone" name="image" class="form-control phone-mask"
                         accept="image/*" placeholder="658 799 8941" aria-label="658 799 8941"
                         aria-describedby="basic-default-phone" onchange="previewImage(event)" />
-                    
+
                 </div>
-            </div>
+            </div> --}}
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="password">Password</label>
                 <div class="col-sm-10 form-password-toggle">

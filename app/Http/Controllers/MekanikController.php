@@ -69,6 +69,7 @@ class MekanikController extends Controller
                     'name' => $value[2],
                     'email' => strtolower(str_replace(" ", "", $value[2])) . rand(1000, 9999) . "@gmail.com",
                     'password' => Hash::make('password'),
+                    'grade' => $value[3]
                 ])->assignRole('Mekanik');
             }
             $data = [

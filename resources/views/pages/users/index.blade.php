@@ -6,7 +6,7 @@
     <a href="{{ route('users.create') }}" class="btn btn-primary">Add Users</a>
 </div>
 <div class="card p-3">
-    {{-- <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('users.import') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="d-flex justify-content-end mb-3">
             <div class="d-flex gap-3">
@@ -15,7 +15,7 @@
                 <button type="submit" class="btn btn-primary">Import</button>
             </div>
         </div>
-    </form> --}}
+    </form>
     <div class="table-responsive text-nowrap">
         <table id="table" class="table">
             <thead>

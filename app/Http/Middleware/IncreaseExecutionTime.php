@@ -15,7 +15,7 @@ class IncreaseExecutionTime
      */
     public function handle(Request $request, Closure $next): Response
     {
-        set_time_limit(300);
+        set_time_limit(3000);
         return $next($request);
     }
 }
