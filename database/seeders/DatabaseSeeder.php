@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CompetenceSeeder::class,
             SubCompetenceSeeder::class,
             SubEgiSeeder::class,
+            PelatihanSeeder::class,
         ]);
         User::factory()->create([
             'nrp' => 'ASD',

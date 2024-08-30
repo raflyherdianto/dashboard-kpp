@@ -39,16 +39,28 @@
         </li>
         <li class="menu-item {{ Request::is('databank*') ? 'active' : '' }}">
             <a href="{{ route('databank.index') }}" class="menu-link ">
-                <i class='bx bx-file menu-icon tf-icons'></i>
+                <i class='bx bx-data menu-icon tf-icons'></i>
                 <div data-i18n="Basic">Databank</div>
             </a>
         </li>
-        <li class="menu-item {{ Request::is('databank*') ? 'active' : '' }}">
-            <a href="{{ route('databank.index') }}" class="menu-link ">
-                <i class='bx bx-file menu-icon tf-icons'></i>
-                <div data-i18n="Basic">Databank</div>
+        <li class="menu-item {{ Request::is('pelatihan*') ? 'active' : '' }}">
+            <a href="{{ route('pelatihan.index') }}" class="menu-link ">
+                <i class='bx bx-pencil menu-icon tf-icons'></i>
+                <div data-i18n="Basic">Pelatihan</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::is('history-pelatihan*') ? 'active' : '' }}">
+            <a href="{{ route('history-pelatihan.index') }}" class="menu-link ">
+                <i class='bx bx-history menu-icon tf-icons'></i>
+                <div data-i18n="Basic">History Pelatihan</div>
+            </a>
+        </li>
+        {{-- <li class="menu-item {{ Request::is('history-pelatihan*') ? 'active' : '' }}">
+            <a href="{{ route('history-pelatihan.index') }}" class="menu-link ">
+                <i class='bx bx-file menu-icon tf-icons'></i>
+                <div data-i18n="Basic">History Pelatihan</div>
+            </a>
+        </li> --}}
         @endrole
         {{-- <li class="menu-item {{ Request::is('attendance*') ? 'active' : '' }}">
         <a href="javascript:void(0);" class="menu-link menu-toggle">

@@ -9,7 +9,13 @@ class Site extends Model
 {
     use HasFactory;
 
-    public function user() {
+    public function user()
+    {
         return $this->hasMany(User::class);
+    }
+
+    public function pelatihan()
+    {
+        return $this->hasMany(HistoryPelatihan::class, 'site_id');
     }
 }

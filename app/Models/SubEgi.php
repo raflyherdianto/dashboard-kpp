@@ -14,7 +14,13 @@ class SubEgi extends Model
         return $this->belongsTo(Egi::class);
     }
 
-    public function competence_score(){
+    public function competence_score()
+    {
         return $this->hasMany(Competence_score::class);
+    }
+
+    public function historyPelatihan()
+    {
+        return $this->hasMany(HistoryPelatihan::class);
     }
 }
