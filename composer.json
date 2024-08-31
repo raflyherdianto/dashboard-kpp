@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.9",
         "maatwebsite/excel": "^3.1",
         "realrashid/sweet-alert": "^7.2",
+        "snapappointments/bootstrap-select": "^1.13",
         "spatie/laravel-permission": "^6.9"
     },
     "require-dev": {
