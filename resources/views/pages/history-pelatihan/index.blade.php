@@ -21,7 +21,18 @@
             <thead>
                 <tr>
                     <th style="width: 5%">No</th>
-                    {{-- <th>Nama </th> --}}
+                    <th>NRP</th>
+                    <th>Nama</th>
+                    <th>Distrik</th>
+                    <th>Department</th>
+                    <th>Posisi</th>
+                    <th>Lokasi</th>
+                    <th>Pelatihan</th>
+                    <th>Awal</th>
+                    <th>Akhir</th>
+                    <th>Kompetensi</th>
+                    <th>Instruktur</th>
+                    <th>Status</th>
                     <th style="width: 10%">Actions</th>
                 </tr>
             </thead>
@@ -32,7 +43,18 @@
                 @foreach ($datas as $data)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    {{-- <td>{{ $data->name }}</td> --}}
+                    <td>{{ $data->mekanik->nrp ?? '-' }}</td>
+                    <td>{{ $data->mekanik->name ?? '-' }}</td>
+                    <td>{{ $data->site->name ?? '-' }}</td>
+                    <td>{{ $data->department->name ?? '-' }}</td>
+                    <td>{{ $data->mekanik->roles[0]->name ?? '-' }}</td>
+                    <td>{{ $data->location ?? '-' }}</td>
+                    <td>{{ $data->pelatihan->name ?? '-' }}</td>
+                    <td>{{ $data->start_date ?? '-' }}</td>
+                    <td>{{ $data->end_date ?? '-' }}</td>
+                    <td>{{ $data->sub_egi ?? '-' }}</td>
+                    <td>{{ $data->instruktur->name ?? '-' }}</td>
+                    <td>{{ $data->status ?? '-' }}</td>
                     <td>
                         <a href="{{ route('pelatihan.show', $data->id) }}" class="bg-label-warning badge">
                             <span class="tf-icons bx bx-edit"></span> Edit

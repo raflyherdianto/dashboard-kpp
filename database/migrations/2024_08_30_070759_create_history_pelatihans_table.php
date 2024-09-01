@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreignId('instruktur_id')->nullable()->constrained('users', 'id');
             $table->foreignId('site_id')->nullable()->constrained();
             $table->foreignId('department_id')->nullable()->constrained();
-            $table->enum('location', ['TC KPP', 'UT', 'Trakindo', 'BINA PERTIWI', 'BANDO', 'IPJ', 'RANT', 'RANTAU', 'PCNS', 'LDSO'])->nullable();
+            $table->string('location')->nullable();
             $table->foreignId('pelatihan_id')->nullable()->constrained();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->foreignId('sub_egi_id')->nullable()->constrained();
+            $table->string('sub_egi')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });
