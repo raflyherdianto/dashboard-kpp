@@ -59,9 +59,7 @@
                     <img id="image-preview" src="" alt="Image Preview"
                         style="display: none; margin-bottom: 10px; max-height: 200px; border-radius: 10px;">
                     @endif
-                    <input type="file" id="basic-default-phone" name="image" class="form-control phone-mask"
-                        accept="image/*" placeholder="658 799 8941" aria-label="658 799 8941"
-                        aria-describedby="basic-default-phone" onchange="previewImage(event)" />
+                    
 
                 </div>
             </div> --}}

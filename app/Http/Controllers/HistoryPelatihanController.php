@@ -26,8 +26,7 @@ class HistoryPelatihanController extends Controller
      */
     public function index()
     {
-        $datas = HistoryPelatihan::all();
-        dd($datas[0]->instruktur);
+        $datas = HistoryPelatihan::with(['mekanik.roles', 'instruktur', 'site', 'department', 'pelatihan'])->get();
         return view('pages.history-pelatihan.index', compact('datas'));
     }
 
@@ -74,22 +73,26 @@ class HistoryPelatihanController extends Controller
             }
 
             // Cek Instruktur secara langsung di database
-            $instruktur = User::where('name', $value[10])->whereHas('roles', function ($q) {
-                $q->where('name', 'Instruktur');
-            })->first();
+            if ($value[10] != null) {
+                $instruktur = User::where('name', $value[10])->whereHas('roles', function ($q) {
+                    $q->where('name', 'Instruktur');
+                })->first();
 
-            if ($instruktur == null) {
-                // Generate unique NRP
-                do {
-                    $randomNrp = Str::random(5) . mt_rand(100, 999);
-                } while (User::where('nrp', $randomNrp)->exists());
+                if ($instruktur == null) {
+                    // Generate unique NRP
+                    do {
+                        $randomNrp = Str::random(5) . mt_rand(100, 999);
+                    } while (User::where('nrp', $randomNrp)->exists());
 
-                $instruktur = User::create([
-                    'nrp' => $randomNrp,
-                    'name' => $value[10],
-                    'email' => strtolower(str_replace(" ", "", $value[10])) . rand(1000, 9999) . "@gmail.com",
-                    'password' => Hash::make('password'),
-                ])->assignRole('Instruktur');
+                    $instruktur = User::create([
+                        'nrp' => $randomNrp,
+                        'name' => $value[10],
+                        'email' => strtolower(str_replace(" ", "", $value[10])) . rand(1000, 9999) . "@gmail.com",
+                        'password' => Hash::make('password'),
+                    ])->assignRole('Instruktur');
+                }
+            } else {
+                $instruktur = null;
             }
 
             $pelatihan = Pelatihan::where('name', 'LIKE', '%' . $value[6] . '%')->first();
@@ -119,7 +122,7 @@ class HistoryPelatihanController extends Controller
                     'start_date' => $startDate,
                     'end_date' => $endDate,
                     'sub_egi' => $value[9] == null ? null : $value[9],
-                    'instruktur_id' => $instruktur->id,
+                    'instruktur_id' => $instruktur->id ?? null,
                     'status' => strtoupper($value[11])
                 ];
             } catch (\Throwable $th) {
@@ -160,7 +163,17 @@ class HistoryPelatihanController extends Controller
      */
     public function store(StoreHistoryPelatihanRequest $request)
     {
-        //
+        $data = $request->all();
+        $mekanik = User::where('nrp', $request->mekanik_id)->first();
+        $instruktur = User::where('nrp', $request->instruktur_id)->first();
+        $pelatihan = Pelatihan::where('name', $request->pelatihan_id)->first();
+        $data['mekanik_id'] = $mekanik->id;
+        $data['instruktur_id'] = $instruktur->id;
+        $data['pelatihan_id'] = $pelatihan->id;
+        unset($data['_token']);
+        HistoryPelatihan::create($data);
+        Alert::success("Success", "Data has been added");
+        return redirect()->route('history-pelatihan.index');
     }
 
     /**

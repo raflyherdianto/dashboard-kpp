@@ -6,7 +6,7 @@
     <a href="{{ route('history-pelatihan.create') }}" class="btn btn-primary">Add Data</a>
 </div>
 <div class="card p-3">
-    <form action="{{ route('history-pelatihan.import') }}" method="POST" enctype="multipart/form-data">
+    {{-- <form action="{{ route('history-pelatihan.import') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="d-flex justify-content-end mb-3">
             <div class="d-flex gap-3">
@@ -15,7 +15,7 @@
                 <button type="submit" class="btn btn-primary">Import</button>
             </div>
         </div>
-    </form>
+    </form> --}}
     <div class="table-responsive text-nowrap">
         <table id="table" class="table">
             <thead>

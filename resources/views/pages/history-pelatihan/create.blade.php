@@ -26,56 +26,33 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="basic-default-name">NRP</label>
                 <div class="col-sm-10">
-                    <select class="js-example-basic-single form-select" name="state">
-                        <option value="AL">Alabama</option>
-                        <option value="WY">Wyoming</option>
-                    </select>
-                </div>
-            </div>
-            {{-- <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-name">NRP</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control @error('nrp') is-invalid @enderror" id="basic-default-name"
-                        name="nrp" placeholder="NRP" value="{{ old('nrp') }}" />
-                    @error('nrp')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
+                    <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter NRP" list="mekanik"
+                        name="mekanik_id" />
+                    <datalist id="mekanik">
+                        @foreach ($mekaniks as $mekanik)
+                        <option value="{{ $mekanik->nrp }}">{{ $mekanik->name }}</option>
+                        @endforeach
+                    </datalist>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-name">Name</label>
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Instruktur</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="basic-default-name"
-                        name="name" placeholder="Name" value="{{ old('name') }}" />
-                    @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
+                    <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Instruktur"
+                        list="instruktur" name="instruktur_id" />
+                    <datalist id="instruktur">
+                        @foreach ($instrukturs as $instruktur)
+                        <option value="{{ $instruktur->nrp }}">{{ $instruktur->name }}</option>
+                        @endforeach
+                    </datalist>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-company">Email</label>
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Distrik</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control @error('email') is-invalid @enderror"
-                        id="basic-default-company" name="email" placeholder="Email Address"
-                        value="{{ old('email') }}" />
-                    @error('email')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-phone">Role</label>
-                <div class="col-sm-10">
-                    <select id="defaultSelect" class="form-select" name="role">
-                        <option value="">Select Role</option>
-                        @foreach ($roles as $role)
-                        <option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>
+                    <select id="defaultSelect" class="form-select" name="site_id">
+                        @foreach ($sites as $role)
+                        <option value="{{ $role->id }}" {{ old('site_id') == $role->id ? 'selected' : '' }}>
                             {{ $role->name }}
                         </option>
                         @endforeach
@@ -83,69 +60,66 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-phone">Position</label>
-                <div class="col-sm-10">
-                    <select id="defaultSelect" class="form-select" name="position_id">
-                        <option value="">Select Position</option>
-                        @foreach ($positions as $position)
-                        <option value="{{ $position->id }}">{{ $position->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-phone">Department</label>
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Department</label>
                 <div class="col-sm-10">
                     <select id="defaultSelect" class="form-select" name="department_id">
-                        <option value="">Select Department</option>
-                        @foreach ($departments as $department)
-                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                        @foreach ($departments as $role)
+                        <option value="{{ $role->id }}" {{ old('department_id') == $role->id ? 'selected' : '' }}>
+                            {{ $role->name }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="basic-default-phone">Site</label>
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Location</label>
                 <div class="col-sm-10">
-                    <select id="defaultSelect" class="form-select" name="site_id">
-                        <option value="">Select Site</option>
-                        @foreach ($sites as $site)
-                        <option value="{{ $site->id }}">{{ $site->name }}</option>
+                    <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Location"
+                        name="location" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Pelatihan</label>
+                <div class="col-sm-10">
+                    <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Pelatihan"
+                        list="pelatihan" name="pelatihan_id" />
+                    <datalist id="pelatihan">
+                        @foreach ($pelatihans as $pelatihan)
+                        <option value="{{ $pelatihan->name }}">{{ $pelatihan->name }}</option>
                         @endforeach
+                    </datalist>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Start Date</label>
+                <div class="col-sm-10">
+                    <input type="date" id="nameWithTitle" class="form-control" placeholder="Enter Pelatihan"
+                        name="start_date" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">End Date</label>
+                <div class="col-sm-10">
+                    <input type="date" id="nameWithTitle" class="form-control" placeholder="Enter Pelatihan"
+                        name="end_date" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Kompetensi</label>
+                <div class="col-sm-10">
+                    <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Kompetensi"
+                        name="sub_egi" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="basic-default-name">Status</label>
+                <div class="col-sm-10">
+                    <select id="defaultSelect" class="form-select" name="status">
+                        <option value="Lulus">Lulus</option>
+                        <option value="Tidak Lulus">Tidak Lulus</option>
                     </select>
                 </div>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="password">Password</label>
-                <div class="col-sm-10 form-password-toggle">
-                    <div class="input-group input-group-merge">
-                        <input type="password" id="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password"
-                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                            aria-describedby="password" value="asdasdasd" />
-                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                        @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label" for="password_confirmation">Password Confirmation</label>
-                <div class="col-sm-10 form-password-toggle">
-                    <div class="input-group input-group-merge">
-                        <input type="password" id="password_confirmation"
-                            class="form-control @error('password_confirmation') is-invalid @enderror"
-                            name="password_confirmation" value="asdasdasd"
-                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                            aria-describedby="password_confirmation" />
-                        <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                        @error('password_confirmation')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-            </div> --}}
             <div class="row justify-content-end">
                 <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary">Send</button>
@@ -156,9 +130,6 @@
     </div>
 </div>
 <script>
-    // $(document).ready(function() {
-    // $('.js-example-basic-single').select2();
-    // });
 </script>
 <script>
     function previewImage(event) {

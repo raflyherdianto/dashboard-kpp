@@ -11,7 +11,7 @@ class StoreCompetence_scoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
