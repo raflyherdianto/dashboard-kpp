@@ -189,7 +189,23 @@ class HistoryPelatihanController extends Controller
      */
     public function edit(HistoryPelatihan $historyPelatihan)
     {
-        //
+        $mekaniks = User::role('Mekanik')->get();
+        $instrukturs = User::role('Instruktur')->get();
+        $pelatihans = Pelatihan::all();
+        $sites = Site::all();
+        $departments = Department::all();
+        $data = $historyPelatihan;
+        $locations = ['TC KPP', 'UT', 'Trakindo', 'BINA PERTIWI', 'BANDO', 'IPJ', 'RANT', 'RANTAU', 'PCNS', 'LDSO'];
+
+        return view('pages.history-pelatihan.edit', compact(
+            'mekaniks',
+            'instrukturs',
+            'pelatihans',
+            'sites',
+            'departments',
+            'locations',
+            'data'
+        ));
     }
 
     /**
@@ -197,7 +213,17 @@ class HistoryPelatihanController extends Controller
      */
     public function update(UpdateHistoryPelatihanRequest $request, HistoryPelatihan $historyPelatihan)
     {
-        //
+        $data = $request->all();
+        $mekanik = User::where('nrp', $request->mekanik_id)->first();
+        $instruktur = User::where('nrp', $request->instruktur_id)->first();
+        $pelatihan = Pelatihan::where('name', $request->pelatihan_id)->first();
+        $data['mekanik_id'] = $mekanik->id;
+        $data['instruktur_id'] = $instruktur->id;
+        $data['pelatihan_id'] = $pelatihan->id;
+        unset($data['_token']);
+        $historyPelatihan->update($data);
+        Alert::success("Success", "Data has been updated");
+        return redirect()->route('history-pelatihan.index');
     }
 
     /**
@@ -205,6 +231,13 @@ class HistoryPelatihanController extends Controller
      */
     public function destroy(HistoryPelatihan $historyPelatihan)
     {
-        //
+        try {
+            $historyPelatihan->delete();
+            Alert::success("Success", "Data has been deleted");
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            Alert::error("Error", $th->getMessage());
+            return redirect()->back();
+        }
     }
 }

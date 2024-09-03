@@ -7,14 +7,14 @@
 </div>
 <div class="card p-3">
     {{-- <form action="{{ route('history-pelatihan.import') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="d-flex justify-content-end mb-3">
-            <div class="d-flex gap-3">
-                <input type="file" class="form-control " id="basic-default-name" name="excel" placeholder="Name"
-                    accept=".xlsx,.xls,.csv" required />
-                <button type="submit" class="btn btn-primary">Import</button>
-            </div>
+    @csrf
+    <div class="d-flex justify-content-end mb-3">
+        <div class="d-flex gap-3">
+            <input type="file" class="form-control " id="basic-default-name" name="excel" placeholder="Name"
+                accept=".xlsx,.xls,.csv" required />
+            <button type="submit" class="btn btn-primary">Import</button>
         </div>
+    </div>
     </form> --}}
     <div class="table-responsive text-nowrap">
         <table id="table" class="table">
@@ -56,10 +56,13 @@
                     <td>{{ $data->instruktur->name ?? '-' }}</td>
                     <td>{{ $data->status ?? '-' }}</td>
                     <td>
-                        <a href="{{ route('pelatihan.show', $data->id) }}" class="bg-label-warning badge">
+                        <a href="{{ route('history-pelatihan.edit', $data->id) }}" class="bg-label-warning badge">
                             <span class="tf-icons bx bx-edit"></span> Edit
                         </a>
-
+                        <a href="javascript:void(0)" onclick="confirmDelete({{ $data->id }})"
+                            class="bg-label-danger badge">
+                            <span class="tf-icons bx bx-trash"></span> Delete
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -91,7 +94,7 @@
     if (result.isConfirmed) {
     var form = document.getElementById('deleteForm');
     if (form) {
-    form.action = '/pelatihan/' + id;
+    form.action = '/history-pelatihan/' + id;
     form.submit();
     } else {
     console.error("Form with ID 'deleteForm' not found.");
