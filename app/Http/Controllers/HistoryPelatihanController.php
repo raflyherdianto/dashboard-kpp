@@ -221,6 +221,7 @@ class HistoryPelatihanController extends Controller
         $data['instruktur_id'] = $instruktur->id;
         $data['pelatihan_id'] = $pelatihan->id;
         unset($data['_token']);
+        unset($data['_method']);
         $historyPelatihan->update($data);
         Alert::success("Success", "Data has been updated");
         return redirect()->route('history-pelatihan.index');
