@@ -163,10 +163,10 @@ class RaportController extends Controller
                     }
                 }
                 RaportDetail::insert($datas);
-                Alert::success('Success', 'Data has been saved');
-                return redirect()->back();
             }
         }
+        Alert::success('Success', 'Data has been saved');
+        return redirect()->back();
     }
 
 
