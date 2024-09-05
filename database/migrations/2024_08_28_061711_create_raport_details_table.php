@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('raport_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('raport_id')->constrained();
-            $table->foreignId('egi_id')->constrained();
+            $table->foreignId('sub_egi_id')->constrained();
             $table->foreignId('competence_id')->constrained();
-            $table->foreignId('sub_competence_id')->constrained();
+            $table->foreignId('sub_competence_id')->nullable()->constrained();
             $table->year('year');
             $table->integer('point')->default(0);
             $table->timestamps();

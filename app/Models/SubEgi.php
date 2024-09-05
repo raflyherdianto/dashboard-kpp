@@ -23,4 +23,9 @@ class SubEgi extends Model
     {
         return $this->hasMany(HistoryPelatihan::class);
     }
+
+    public function raportDetails()
+    {
+        return $this->hasMany(RaportDetail::class);
+    }
 }

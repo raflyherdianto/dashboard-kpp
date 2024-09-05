@@ -82,7 +82,7 @@
         </div>
     </div>
     <div class="table-responsive text-nowrap mt-3">
-        {{-- <form action="{{ route('mekanik.import') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('mekanik.import') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="d-flex justify-content-end mb-3">
                 <div class="d-flex gap-3">
@@ -91,7 +91,7 @@
                     <button type="submit" class="btn btn-primary">Import</button>
                 </div>
             </div>
-        </form> --}}
+        </form>
         <table id="table" class="table">
             <thead>
                 <tr>
