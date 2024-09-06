@@ -123,85 +123,85 @@ class RaportController extends Controller
                     'updated_at' => now(),
                 ]; // !CLEAR
                 $raport = Raport::create($processedUserData);
-                $datas = [];
-                foreach ($cleanedData as $key => $value) {
-                    try {
-                        $egiValue = $value['egi'];
-                        $egi = SubEgi::where('name', 'like', '%' . $value['egi'] . '%')->first();
-                        if (!$egi) {
-                            $egi = SubEgi::create(['name' => $value['egi']]);
-                            $dataCompetence = [
-                                [
-                                    'code' => 'I',
-                                    'name' => 'PREVENTIVE MAINTENANCE'
-                                ],
-                                [
-                                    'code' => 'II',
-                                    'name' => 'REMOVE & INSTALL'
-                                ],
-                                [
-                                    'code' => 'III',
-                                    'name' => 'OVERHAULING'
-                                ],
-                                [
-                                    'code' => 'IV',
-                                    'name' => 'MACHINE TROUBLESHOOTING'
-                                ],
-                                [
-                                    'code' => 'V',
-                                    'name' => 'MECHANINCAL INSTRUCTION'
-                                ],
-                                [
-                                    'code' => 'VI',
-                                    'name' => 'REPAIR'
-                                ],
-                            ];
-                            foreach ($dataCompetence as $key => $value) {
-                                Competence::create([
-                                    'name' => $value['name'],
-                                    'egi_id' => $egi->id,
-                                    'code' => $value['code'],
-                                    'created_at' => now(),
-                                    'updated_at' => now()
-                                ]);
-                            }
-                            dd('cok');
-                        }
-                        // Cek apakah kompetensi mengandung '&'
-                        $competenceValue = $value['competence'];
-                        if ($competenceValue == 'REMOVE INSTALL') {
-                            $competenceValue = 'REMOVE & INSTALL';
-                        }
+                // $datas = [];
+                // foreach ($cleanedData as $key => $value) {
+                //     try {
+                //         $egiValue = $value['egi'];
+                //         $egi = SubEgi::where('name', 'like', '%' . $value['egi'] . '%')->first();
+                //         if (!$egi) {
+                //             $egi = SubEgi::create(['name' => $value['egi']]);
+                //             $dataCompetence = [
+                //                 [
+                //                     'code' => 'I',
+                //                     'name' => 'PREVENTIVE MAINTENANCE'
+                //                 ],
+                //                 [
+                //                     'code' => 'II',
+                //                     'name' => 'REMOVE & INSTALL'
+                //                 ],
+                //                 [
+                //                     'code' => 'III',
+                //                     'name' => 'OVERHAULING'
+                //                 ],
+                //                 [
+                //                     'code' => 'IV',
+                //                     'name' => 'MACHINE TROUBLESHOOTING'
+                //                 ],
+                //                 [
+                //                     'code' => 'V',
+                //                     'name' => 'MECHANINCAL INSTRUCTION'
+                //                 ],
+                //                 [
+                //                     'code' => 'VI',
+                //                     'name' => 'REPAIR'
+                //                 ],
+                //             ];
+                //             foreach ($dataCompetence as $key => $value) {
+                //                 Competence::create([
+                //                     'name' => $value['name'],
+                //                     'egi_id' => $egi->id,
+                //                     'code' => $value['code'],
+                //                     'created_at' => now(),
+                //                     'updated_at' => now()
+                //                 ]);
+                //             }
+                //             dd('cok');
+                //         }
+                //         // Cek apakah kompetensi mengandung '&'
+                //         $competenceValue = $value['competence'];
+                //         if ($competenceValue == 'REMOVE INSTALL') {
+                //             $competenceValue = 'REMOVE & INSTALL';
+                //         }
 
-                        $competence = Competence::where('name', 'LIKE', '%' . $competenceValue . '%')
-                            ->where('egi_id', $egi->egi_id ? $egi->egi_id : $egi->id)
-                            ->first();
+                //         $competence = Competence::where('name', 'LIKE', '%' . $competenceValue . '%')
+                //             ->where('egi_id', $egi->egi_id ? $egi->egi_id : $egi->id)
+                //             ->first();
 
-                        $competenceSubCompetence = CompetenceSubCompetence::where('competence_id', $competence->id)->get();
-                        $subCompetenceQuery = SubCompetence::where('name', $value['sub_competence'])->first();
-                        if (!$subCompetenceQuery) {
-                            $subCompetenceQuery = SubCompetence::create([
-                                'name' => $value['sub_competence'],
-                                'created_at' => now(),
-                                'updated_at' => now(),
-                            ]);
-                        }
-                        $subCompetence = $competenceSubCompetence->where('sub_competence_id', $subCompetenceQuery->id)->first();
-                        $datas[] = [
-                            'raport_id' => $raport->id,
-                            'sub_egi_id' => $egi->id,
-                            'competence_id' => $competence->id,
-                            'sub_competence_id' => $subCompetenceQuery->id,
-                            'year' => $value['tahun'],
-                            'point' => $value['poin'],
-                            'created_at' => now(),
-                            'updated_at' => now()
-                        ];
-                    } catch (\Throwable $th) {
-                        dd($value, $th, $egi, $competence);
-                    }
-                }
-                RaportDetail::insert($datas);
+                //         $competenceSubCompetence = CompetenceSubCompetence::where('competence_id', $competence->id)->get();
+                //         $subCompetenceQuery = SubCompetence::where('name', $value['sub_competence'])->first();
+                //         if (!$subCompetenceQuery) {
+                //             $subCompetenceQuery = SubCompetence::create([
+                //                 'name' => $value['sub_competence'],
+                //                 'created_at' => now(),
+                //                 'updated_at' => now(),
+                //             ]);
+                //         }
+                //         $subCompetence = $competenceSubCompetence->where('sub_competence_id', $subCompetenceQuery->id)->first();
+                //         $datas[] = [
+                //             'raport_id' => $raport->id,
+                //             'sub_egi_id' => $egi->id,
+                //             'competence_id' => $competence->id,
+                //             'sub_competence_id' => $subCompetenceQuery->id,
+                //             'year' => $value['tahun'],
+                //             'point' => $value['poin'],
+                //             'created_at' => now(),
+                //             'updated_at' => now()
+                //         ];
+                //     } catch (\Throwable $th) {
+                //         dd($value, $th, $egi, $competence);
+                //     }
+                // }
+                // RaportDetail::insert($datas);
             }
         }
         Alert::success('Success', 'Data has been saved');
