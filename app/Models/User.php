@@ -79,4 +79,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(HistoryPelatihan::class, 'instruktur_id');
     }
+
+    public function raport()
+    {
+        return $this->hasMany(Raport::class, 'mekanik_id');
+    }
 }

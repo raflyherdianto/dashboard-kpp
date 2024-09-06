@@ -21,10 +21,11 @@
             <thead>
                 <tr>
                     <th style="width: 5%">No</th>
-                    {{-- <th>NRP</th>
+                    <th>NRP</th>
                     <th>Name</th>
-                    <th>Role</th>
-                    <th>Email</th> --}}
+                    <th>Grade</th>
+                    <th>Jobsite</th>
+                    <th>Section</th>
                     <th style="width: 10%">Actions</th>
                 </tr>
             </thead>
@@ -35,10 +36,11 @@
                 @foreach ($datas as $data)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    {{-- <td>{{ $data->nrp }}</td>
-                    <td>{{ $data->name }}</td>
-                    <td>{{ $data->roles[0]->name ?? '-' }}</td>
-                    <td>{{ $data->email }}</td> --}}
+                    <td>{{ $data->mekanik->nrp }}</td>
+                    <td>{{ $data->mekanik->name }}</td>
+                    <td>{{ $data->grade }}</td>
+                    <td>{{ $data->site->name }}</td>
+                    <td>{{ $data->section->name }}</td>
                     <td>
                         <a href="{{ route('users.show', $data->id) }}" class="bg-label-info badge">
                             <span class="tf-icons bx bx-show"></span> Show

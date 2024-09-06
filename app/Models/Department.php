@@ -18,4 +18,9 @@ class Department extends Model
     {
         return $this->hasMany(HistoryPelatihan::class, 'department_id');
     }
+
+    public function raport()
+    {
+        return $this->hasMany(Raport::class, 'section_id');
+    }
 }
